@@ -18,6 +18,8 @@
 7. [Using Sets in Zones](#7-using-sets-in-zones)
 8. [Populating Sets from Files](#8-populating-sets-from-files)
 9. [Geo-blocking with IP Sets](#9-geo-blocking-with-ip-sets)
+   - [Blocking a country](#using-ipdeny-com-cidr-lists-ipdeny-approach)
+   - [Allowing only a specific country](#allowing-only-a-specific-country)
 10. [IP Sets in nftables](#10-ip-sets-in-nftables)
 11. [IP Set XML Format](#11-ip-set-xml-format)
 12. [Lab 9 — Dynamic Block List with Auto-Expiry](#lab-9--dynamic-block-list-with-auto-expiry)
@@ -409,11 +411,129 @@ firewall-cmd --permanent --zone=public --add-rich-rule='
 firewall-cmd --reload
 ```
 
+### Allowing only a specific country
+
+The mirror image of geo-blocking: instead of dropping traffic *from* a country,
+you **accept** traffic *from* one country and drop everything else. This is
+useful for services that have a strictly regional user base (e.g. an internal
+portal that should only be reachable from within Japan).
+
+```bash
+# Script to download per-country CIDR list from ipdeny.com and build an allow-set
+cat > /usr/local/bin/build-geo-allow.sh << 'SCRIPT'
+#!/usr/bin/env bash
+# Usage: build-geo-allow.sh <COUNTRY_CODE>
+COUNTRY="$1"
+SETNAME="geo-allow-${COUNTRY,,}"
+TMPFILE=$(mktemp)
+
+# Download CIDR list for country (using ipdeny.com)
+curl -s "https://www.ipdeny.com/ipblocks/data/aggregated/${COUNTRY,,}-aggregated.zone" \
+  > "$TMPFILE"
+
+# Count entries BEFORE removing the temp file
+ENTRY_COUNT=$(wc -l < "$TMPFILE")
+
+# Create ipset XML
+cat > "/etc/firewalld/ipsets/${SETNAME}.xml" << EOF
+<?xml version="1.0" encoding="utf-8"?>
+<ipset type="hash:net">
+  <short>Geo-allow: ${COUNTRY}</short>
+  <description>All IP ranges allocated to ${COUNTRY} (allowlist).</description>
+  <option name="family" value="inet"/>
+EOF
+
+while IFS= read -r cidr; do
+  [[ -z "$cidr" ]] && continue
+  echo "  <entry>${cidr}</entry>" >> "/etc/firewalld/ipsets/${SETNAME}.xml"
+done < "$TMPFILE"
+
+echo "</ipset>" >> "/etc/firewalld/ipsets/${SETNAME}.xml"
+rm "$TMPFILE"
+
+firewall-cmd --reload
+echo "Geo-allow set '${SETNAME}' created with ${ENTRY_COUNT} networks."
+SCRIPT
+chmod +x /usr/local/bin/build-geo-allow.sh
+
+# Build the allowlist for Japan
+/usr/local/bin/build-geo-allow.sh JP
+
+# Accept traffic from that country
+firewall-cmd --permanent --zone=public --add-rich-rule='
+  rule family="ipv4" source ipset="geo-allow-jp" accept
+'
+firewall-cmd --reload
+```
+
+#### Combined pattern: allow one country, drop everything else
+
+Use rich rule **priorities** to ensure the accept fires before a blanket drop.
+Lower priority numbers are evaluated first.
+
+```bash
+# Priority -100: accept traffic whose source is in the Japan allowlist
+firewall-cmd --permanent --zone=public --add-rich-rule='
+  rule priority="-100" family="ipv4" source ipset="geo-allow-jp" accept
+'
+
+# Priority 0: drop all other IPv4 traffic
+firewall-cmd --permanent --zone=public --add-rich-rule='
+  rule priority="0" family="ipv4" drop
+'
+
+firewall-cmd --reload
+```
+
+Packet evaluation order:
+1. Packet arrives → priority `-100` rule checked first
+2. Source IP is in `geo-allow-jp` → **accepted**, evaluation stops
+3. Source IP is NOT in `geo-allow-jp` → falls through to priority `0` → **dropped**
+
+> **⚠️ WARNING — Drop-all locks you out too**
+> The priority `0` drop rule catches *all* IPv4 traffic not already accepted,
+> including your own management connection. Always add an explicit accept for
+> your own IP or subnet *before* adding the drop-all rule:
+> ```bash
+> # Accept your management IP first (priority -200 — runs before everything)
+> firewall-cmd --permanent --zone=public --add-rich-rule='
+>   rule priority="-200" family="ipv4" source address="YOUR_MGMT_IP/32" accept
+> '
+> firewall-cmd --reload
+> # Then add the geo-allow + drop-all rules above
+> ```
+
+#### Removing geo-allow rules and sets
+
+```bash
+# Remove the drop-all rule
+firewall-cmd --permanent --zone=public --remove-rich-rule='
+  rule priority="0" family="ipv4" drop
+'
+
+# Remove the geo-allow rule
+firewall-cmd --permanent --zone=public --remove-rich-rule='
+  rule priority="-100" family="ipv4" source ipset="geo-allow-jp" accept
+'
+
+# Delete the ipset XML and reload
+rm /etc/firewalld/ipsets/geo-allow-jp.xml
+firewall-cmd --reload
+```
+
+---
+
 > **📝 NOTE — Geo-blocking limitations**
 > Geo-blocking is a coarse measure. Determined actors use VPNs, proxies, and
 > cloud provider IPs from other regions. It's effective for blocking opportunistic
 > attacks from specific regions but not for determined adversaries. Use it as
 > one layer in a defence-in-depth strategy.
+>
+> **Geo-allowlisting carries its own risk**: any legitimate user outside the
+> permitted country is silently blocked, including remote workers, travellers,
+> and third-party integrations. Only use geo-allowlisting for services whose
+> entire user base is known to be geographically constrained, and ensure you
+> have an out-of-band management path that bypasses the restriction.
 
 ---
 
