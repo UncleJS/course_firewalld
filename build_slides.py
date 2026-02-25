@@ -806,6 +806,20 @@ def add_code_text_box(slide, style, x, y, w, h, code_text: str,
     return f
 
 
+def add_copyright_footer(slide, st: Styles):
+    """
+    Add a small copyright line at the very bottom of every slide.
+    Positioned at y=18.35cm (leaving ~0.7cm of canvas height), spanning the
+    full width.  Uses the existing ts_small / ps_small styles (grey, 14pt).
+    """
+    footer_paras = [
+        text_para(st.ts_small, st.ps_small,
+                  "© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0")
+    ]
+    add_text_box(slide, st.gs_frame,
+                 "1cm", "18.35cm", "31.87cm", "0.6cm", footer_paras)
+
+
 def add_notes(slide, st: Styles, text: str):
     """Attach speaker notes to a slide."""
     if not text.strip():
@@ -844,14 +858,15 @@ def render_title(st: Styles, sd: dict) -> Page:
     add_text_box(slide, st.gs_frame,
                  "1.5cm", "4.5cm", "30.87cm", "5cm", paras)
 
-    # Footer
+    # Edition banner
     footer_paras = [
         text_para(st.ts_small, st.ps_small,
                   "Red Hat Enterprise Linux 10  |  Instructor Edition")
     ]
     add_text_box(slide, st.gs_frame,
-                 "1.5cm", "17.5cm", "30.87cm", "1cm", footer_paras)
+                 "1.5cm", "17.5cm", "30.87cm", "0.7cm", footer_paras)
 
+    add_copyright_footer(slide, st)
     add_notes(slide, st, sd['notes'])
     return slide
 
@@ -871,6 +886,7 @@ def render_objectives(st: Styles, sd: dict) -> Page:
         add_text_box(slide, st.gs_frame,
                      "1.5cm", "3cm", "30.87cm", "15.5cm", paras)
 
+    add_copyright_footer(slide, st)
     add_notes(slide, st, sd['notes'])
     return slide
 
@@ -894,6 +910,7 @@ def render_content(st: Styles, sd: dict) -> Page:
         add_text_box(slide, st.gs_frame,
                      "1cm", "2.9cm", "31.87cm", "15.5cm", paras)
 
+    add_copyright_footer(slide, st)
     add_notes(slide, st, sd['notes'])
     return slide
 
@@ -916,6 +933,7 @@ def render_lab(st: Styles, sd: dict) -> Page:
         add_text_box(slide, st.gs_frame,
                      "1.5cm", "3.1cm", "30.87cm", "15.5cm", paras)
 
+    add_copyright_footer(slide, st)
     add_notes(slide, st, sd['notes'])
     return slide
 
@@ -933,9 +951,10 @@ def render_code(st: Styles, sd: dict) -> Page:
         size_pt = font_size_for_code(sd['code'])
         ts_dyn  = code_text_style(st, size_pt, C_GREEN, "DejaVu Sans Mono")
         add_code_text_box(slide, st.gs_code,
-                          "1cm", "3.3cm", "31.87cm", "15.2cm",
+                          "1cm", "3.3cm", "31.87cm", "14.5cm",
                           sd['code'], ts_dyn, st.ps_code)
 
+    add_copyright_footer(slide, st)
     add_notes(slide, st, sd['notes'])
     return slide
 
@@ -951,9 +970,10 @@ def render_diagram(st: Styles, sd: dict) -> Page:
         size_pt = font_size_for_code(sd['code'])
         ts_dyn  = code_text_style(st, size_pt, C_WHITE, "DejaVu Sans Mono")
         add_code_text_box(slide, st.gs_code,
-                          "1cm", "3.3cm", "31.87cm", "15.2cm",
+                          "1cm", "3.3cm", "31.87cm", "14.5cm",
                           sd['code'], ts_dyn, st.ps_diag)
 
+    add_copyright_footer(slide, st)
     add_notes(slide, st, sd['notes'])
     return slide
 
@@ -1034,6 +1054,7 @@ def render_table(st: Styles, sd: dict) -> Page:
     tbl_frame.addElement(tbl)
     slide.addElement(tbl_frame)
 
+    add_copyright_footer(slide, st)
     add_notes(slide, st, sd['notes'])
     return slide
 

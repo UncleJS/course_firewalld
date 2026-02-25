@@ -10,20 +10,22 @@
 
 ## Table of Contents
 
-1. [Why Rich Rules?](#1-why-rich-rules)
-2. [Rich Rule Grammar](#2-rich-rule-grammar)
-3. [Match Elements](#3-match-elements)
-4. [Actions](#4-actions)
-5. [Logging and Auditing](#5-logging-and-auditing)
-6. [Priority Ordering](#6-priority-ordering)
-7. [Timeout (Temporary) Rules](#7-timeout-temporary-rules)
-8. [Rich Rules in Zones vs Policies](#8-rich-rules-in-zones-vs-policies)
-9. [Practical Rich Rule Patterns](#9-practical-rich-rule-patterns)
-10. [Rich Rule XML Format](#10-rich-rule-xml-format)
-11. [Troubleshooting Rich Rules](#11-troubleshooting-rich-rules)
-12. [Lab 6 — Per-IP Control and Logging](#lab-6--per-ip-control-and-logging)
+1. [1. Why Rich Rules?](#1-why-rich-rules)
+2. [2. Rich Rule Grammar](#2-rich-rule-grammar)
+3. [3. Match Elements](#3-match-elements)
+4. [4. Actions](#4-actions)
+5. [5. Logging and Auditing](#5-logging-and-auditing)
+6. [6. Priority Ordering](#6-priority-ordering)
+7. [7. Timeout (Temporary) Rules](#7-timeout-temporary-rules)
+8. [8. Rich Rules in Zones vs Policies](#8-rich-rules-in-zones-vs-policies)
+9. [9. Practical Rich Rule Patterns](#9-practical-rich-rule-patterns)
+10. [10. Rich Rule XML Format](#10-rich-rule-xml-format)
+11. [11. Troubleshooting Rich Rules](#11-troubleshooting-rich-rules)
+12. [Lab 6 — Per-IP Control and Logging](#lab-6-per-ip-control-and-logging)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. Why Rich Rules?
 
@@ -41,6 +43,8 @@ Rich rules can be attached to both **zones** and **policies**. They follow the
 same two-layer (runtime/permanent) model as all other firewalld configuration.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 2. Rich Rule Grammar
 
@@ -66,6 +70,8 @@ Every element is optional except the final action. Conditions are combined with
 implicit AND — a packet must match all specified conditions.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 3. Match Elements
 
@@ -146,6 +152,8 @@ rule family="ipv6" icmp-type name="router-advertisement" accept
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 4. Actions
 
 ### `accept`
@@ -202,6 +210,8 @@ rule family="ipv4" source address="10.100.0.0/16" mark set="0x1"
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 5. Logging and Auditing
 
 Logging and auditing can be combined with any action. They are executed *before*
@@ -257,6 +267,8 @@ rule family="ipv4" source address="203.0.113.0/24" service name="https" \
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 6. Priority Ordering
 
 Rich rules within a zone or policy are evaluated in **priority order**. Priority
@@ -285,6 +297,8 @@ Without priorities, rules are evaluated in the order they were added.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 7. Timeout (Temporary) Rules
 
 Rich rules can include `--timeout`, making them automatically expire:
@@ -309,6 +323,8 @@ This is extremely useful for incident response: block an attacker now, and the
 rule cleans itself up automatically rather than leaving a permanent rule behind.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 8. Rich Rules in Zones vs Policies
 
@@ -336,6 +352,8 @@ firewall-cmd --permanent --zone=public --remove-rich-rule='
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 9. Practical Rich Rule Patterns
 
@@ -427,6 +445,8 @@ firewall-cmd --permanent --zone=dmz --add-rich-rule='
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10. Rich Rule XML Format
 
 Rich rules in zone and policy XML files:
@@ -460,6 +480,8 @@ Rich rules in zone and policy XML files:
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 11. Troubleshooting Rich Rules
 
@@ -509,6 +531,8 @@ firewall-cmd --policy mypolicy --list-rich-rules
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 6 — Per-IP Control and Logging
 
@@ -697,3 +721,7 @@ Rich rules give you surgical control:
 *Module 06 complete.*
 
 **Continue to [Module 07 — NAT, Masquerading, and Port Forwarding →](./07-nat-masquerading-and-port-forwarding.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

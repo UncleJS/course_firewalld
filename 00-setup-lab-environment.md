@@ -9,20 +9,22 @@
 
 ## Table of Contents
 
-1. [Why Containers as Lab Nodes?](#1-why-containers-as-lab-nodes)
-2. [Host Requirements](#2-host-requirements)
-3. [How the Lab Works](#3-how-the-lab-works)
-4. [Building the Lab Container Image](#4-building-the-lab-container-image)
-5. [Podman Networks — Lab Topology](#5-podman-networks--lab-topology)
-6. [Starting Lab Nodes](#6-starting-lab-nodes)
-7. [Helper Scripts](#7-helper-scripts)
-8. [Verifying firewalld Inside a Node](#8-verifying-firewalld-inside-a-node)
-9. [Topology Reference Table](#9-topology-reference-table)
-10. [Lab 0 — Spin Up and Verify](#lab-0--spin-up-and-verify)
+1. [1. Why Containers as Lab Nodes?](#1-why-containers-as-lab-nodes)
+2. [2. Host Requirements](#2-host-requirements)
+3. [3. How the Lab Works](#3-how-the-lab-works)
+4. [4. Building the Lab Container Image](#4-building-the-lab-container-image)
+5. [5. Podman Networks — Lab Topology](#5-podman-networks-lab-topology)
+6. [6. Starting Lab Nodes](#6-starting-lab-nodes)
+7. [7. Helper Scripts](#7-helper-scripts)
+8. [8. Verifying firewalld Inside a Node](#8-verifying-firewalld-inside-a-node)
+9. [9. Topology Reference Table](#9-topology-reference-table)
+10. [Lab 0 — Spin Up and Verify](#lab-0-spin-up-and-verify)
 11. [Teardown and Reset](#teardown-and-reset)
 12. [Troubleshooting the Lab Setup](#troubleshooting-the-lab-setup)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. Why Containers as Lab Nodes?
 
@@ -46,6 +48,8 @@ loaded. In practice, all nftables and netfilter functionality we need is present
 in any modern RHEL/Fedora/CentOS Stream 10 kernel.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 2. Host Requirements
 
@@ -91,6 +95,8 @@ sudo dnf install -y podman nftables nmap-ncat iputils bind-utils
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 3. How the Lab Works
 
 Each "node" in the lab is a systemd-enabled UBI 10 container running as your
@@ -130,6 +136,8 @@ Not every module uses all three nodes. Each module states which nodes are needed
 and how to start them.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 4. Building the Lab Container Image
 
@@ -215,6 +223,8 @@ localhost/firewalld-lab   latest      a1b2c3d4e5f6  2 minutes ago  420 MB
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 5. Podman Networks — Lab Topology
 
 Create three isolated networks to simulate the external, DMZ, and internal
@@ -261,6 +271,8 @@ podman        podman            bridge
 > explicitly.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 6. Starting Lab Nodes
 
@@ -373,6 +385,8 @@ podman exec node1 firewall-cmd --state
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 7. Helper Scripts
 
 To avoid typing long `podman run` commands repeatedly, save these helper scripts
@@ -482,6 +496,8 @@ chmod +x ~/firewalld-lab/reset-lab.sh
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 8. Verifying firewalld Inside a Node
 
 Once a node is running, verify that firewalld started correctly:
@@ -542,6 +558,8 @@ public (active)
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 9. Topology Reference Table
 
 Use this table as a quick reference when each module says "start the two-node
@@ -557,6 +575,8 @@ Each module header specifies exactly which topology it uses and includes the
 exact start commands if they differ from the defaults above.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 0 — Spin Up and Verify
 
@@ -736,6 +756,8 @@ podman exec node1 firewall-cmd --get-default-zone
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Teardown and Reset
 
 ### Stop nodes (preserves configuration)
@@ -770,6 +792,8 @@ podman rmi firewalld-lab
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Troubleshooting the Lab Setup
 
@@ -837,3 +861,7 @@ the same packages without subscription requirements.
 *Module 00 complete. You now have a working lab environment.*
 
 **Continue to [Module 01 — Introduction and Architecture →](./01-introduction-and-architecture.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

@@ -10,21 +10,23 @@
 
 ## Table of Contents
 
-1. [The Limits of Zones Alone](#1-the-limits-of-zones-alone)
-2. [What is a Policy?](#2-what-is-a-policy)
-3. [Policy Anatomy](#3-policy-anatomy)
-4. [Ingress and Egress Zones](#4-ingress-and-egress-zones)
-5. [The HOST and ANY Pseudo-zones](#5-the-host-and-any-pseudo-zones)
-6. [Policy Targets](#6-policy-targets)
-7. [Policy Priority](#7-policy-priority)
-8. [Policy Rules: Services, Ports, Rich Rules](#8-policy-rules-services-ports-rich-rules)
-9. [Masquerading in Policies](#9-masquerading-in-policies)
-10. [Policy Sets — New in firewalld 2.4 / RHEL 10](#10-policy-sets--new-in-firewalld-24--rhel-10)
-11. [Zones vs Policies — When to Use Each](#11-zones-vs-policies--when-to-use-each)
-12. [Policy XML Format](#12-policy-xml-format)
-13. [Lab 5 — Three-Node DMZ Topology](#lab-5--three-node-dmz-topology)
+1. [1. The Limits of Zones Alone](#1-the-limits-of-zones-alone)
+2. [2. What is a Policy?](#2-what-is-a-policy)
+3. [3. Policy Anatomy](#3-policy-anatomy)
+4. [4. Ingress and Egress Zones](#4-ingress-and-egress-zones)
+5. [5. The HOST and ANY Pseudo-zones](#5-the-host-and-any-pseudo-zones)
+6. [6. Policy Targets](#6-policy-targets)
+7. [7. Policy Priority](#7-policy-priority)
+8. [8. Policy Rules: Services, Ports, Rich Rules](#8-policy-rules-services-ports-rich-rules)
+9. [9. Masquerading in Policies](#9-masquerading-in-policies)
+10. [10. Policy Sets — New in firewalld 2.4 / RHEL 10](#10-policy-sets-new-in-firewalld-24-rhel-10)
+11. [11. Zones vs Policies — When to Use Each](#11-zones-vs-policies-when-to-use-each)
+12. [12. Policy XML Format](#12-policy-xml-format)
+13. [Lab 5 — Three-Node DMZ Topology](#lab-5-three-node-dmz-topology)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. The Limits of Zones Alone
 
@@ -54,6 +56,8 @@ to `dmz`. That's what **policies** are for.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 2. What is a Policy?
 
 A **policy** is a directional set of rules that applies to traffic flowing
@@ -76,6 +80,8 @@ Zone rule on 'dmz':        Controls: What can DMZ hosts do when they reach THIS 
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 3. Policy Anatomy
 
@@ -114,6 +120,8 @@ firewall-cmd --info-policy internet_to_dmz
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 4. Ingress and Egress Zones
 
 Every policy has one or more **ingress zones** (where traffic comes from) and
@@ -139,6 +147,8 @@ firewall-cmd --permanent --policy outbound --add-egress-zone ANY
 > each direction explicitly.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 5. The HOST and ANY Pseudo-zones
 
@@ -204,6 +214,8 @@ firewall-cmd --permanent --policy block_all_to_secret --set-target DROP
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 6. Policy Targets
 
 The target defines what happens to packets that traverse this policy but don't
@@ -229,6 +241,8 @@ firewall-cmd --permanent --policy mypolicy --get-target
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 7. Policy Priority
 
@@ -283,6 +297,8 @@ firewall-cmd --permanent --policy default_drop --set-target DROP
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 8. Policy Rules: Services, Ports, Rich Rules
 
 Policies support the same rule types as zones:
@@ -307,6 +323,8 @@ firewall-cmd --permanent --policy mypolicy --add-icmp-block echo-request
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 9. Masquerading in Policies
 
@@ -334,6 +352,8 @@ firewall-cmd --permanent --policy nat_inbound \
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 10. Policy Sets — New in firewalld 2.4 / RHEL 10
 
@@ -378,6 +398,8 @@ firewall-cmd --reload
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 11. Zones vs Policies — When to Use Each
 
 | Question | Use |
@@ -395,6 +417,8 @@ The key distinction:
 - **Policy rules** → traffic THROUGH the host (forwarding/routing)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 12. Policy XML Format
 
@@ -433,6 +457,8 @@ The key distinction:
 Location: `/etc/firewalld/policies/`
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 5 — Three-Node DMZ Topology
 
@@ -661,3 +687,7 @@ podman stop node1 node2 node3
 *Module 05 complete.*
 
 **Continue to [Module 06 — Rich Rules →](./06-rich-rules.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

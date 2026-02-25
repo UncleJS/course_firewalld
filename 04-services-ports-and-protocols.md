@@ -9,19 +9,21 @@
 
 ## Table of Contents
 
-1. [Services vs Ports — Which Should You Use?](#1-services-vs-ports--which-should-you-use)
-2. [Predefined Services](#2-predefined-services)
-3. [Service XML Format](#3-service-xml-format)
-4. [Managing Services on Zones](#4-managing-services-on-zones)
-5. [Raw Port and Protocol Management](#5-raw-port-and-protocol-management)
-6. [Creating Custom Services](#6-creating-custom-services)
-7. [ICMP Types and ICMP Blocking](#7-icmp-types-and-icmp-blocking)
-8. [ICMP Block Inversion](#8-icmp-block-inversion)
-9. [Source Ports](#9-source-ports)
-10. [Connection Tracking Helpers](#10-connection-tracking-helpers)
-11. [Lab 4 — Custom Service for a Containerised App](#lab-4--custom-service-for-a-containerised-app)
+1. [1. Services vs Ports — Which Should You Use?](#1-services-vs-ports-which-should-you-use)
+2. [2. Predefined Services](#2-predefined-services)
+3. [3. Service XML Format](#3-service-xml-format)
+4. [4. Managing Services on Zones](#4-managing-services-on-zones)
+5. [5. Raw Port and Protocol Management](#5-raw-port-and-protocol-management)
+6. [6. Creating Custom Services](#6-creating-custom-services)
+7. [7. ICMP Types and ICMP Blocking](#7-icmp-types-and-icmp-blocking)
+8. [8. ICMP Block Inversion](#8-icmp-block-inversion)
+9. [9. Source Ports](#9-source-ports)
+10. [10. Connection Tracking Helpers](#10-connection-tracking-helpers)
+11. [Lab 4 — Custom Service for a Containerised App](#lab-4-custom-service-for-a-containerised-app)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. Services vs Ports — Which Should You Use?
 
@@ -40,6 +42,8 @@ is far more readable and auditable than a list of port numbers.
 Reserve raw ports for one-off, temporary rules during testing.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 2. Predefined Services
 
@@ -129,6 +133,8 @@ and allow it.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 3. Service XML Format
 
 The full schema for service XML files:
@@ -165,6 +171,8 @@ The full schema for service XML files:
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 4. Managing Services on Zones
 
@@ -215,6 +223,8 @@ firewall-cmd --zone=public --add-service=http --timeout=2h
 > in the runtime state and expire automatically.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 5. Raw Port and Protocol Management
 
@@ -273,6 +283,8 @@ Common IP protocol numbers:
 | SCTP | 132 | Telecom, high reliability |
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 6. Creating Custom Services
 
@@ -346,6 +358,8 @@ firewall-cmd --info-service=ssh
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 7. ICMP Types and ICMP Blocking
 
 ICMP (Internet Control Message Protocol) is used for:
@@ -405,6 +419,8 @@ firewall-cmd --permanent --zone=public --remove-icmp-block=echo-request
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 8. ICMP Block Inversion
 
 Normally, an ICMP block list is an **allowlist exception**: all ICMP is allowed
@@ -438,6 +454,8 @@ firewall-cmd --permanent --zone=public --remove-icmp-block-inversion
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 9. Source Ports
 
 Most firewall rules match on **destination port** — what service the packet
@@ -465,6 +483,8 @@ firewall-cmd --permanent --zone=public --remove-source-port=53/udp
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 10. Connection Tracking Helpers
 
@@ -525,6 +545,8 @@ firewall-cmd --zone=internal --list-helpers
 > require `nf_conntrack_<protocol>` kernel modules.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 4 — Custom Service for a Containerised App
 
@@ -746,3 +768,7 @@ You learned:
 *Module 04 complete.*
 
 **Continue to [Module 05 — Policies and Inter-Zone Routing →](./05-policies-and-inter-zone-routing.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

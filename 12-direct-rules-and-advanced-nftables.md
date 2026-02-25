@@ -1,11 +1,32 @@
 # Module 12 — Direct Rules and Advanced nftables
 
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Learning Objectives](#learning-objectives)
+3. [12.1 — When to Go Below firewalld](#121-when-to-go-below-firewalld)
+4. [12.2 — firewalld Direct Interface (Legacy)](#122-firewalld-direct-interface-legacy)
+5. [12.3 — Standalone nftables Tables](#123-standalone-nftables-tables)
+6. [12.4 — Advanced nftables Expressions](#124-advanced-nftables-expressions)
+7. [12.5 — nftables Flowtables (Fastpath Forwarding)](#125-nftables-flowtables-fastpath-forwarding)
+8. [12.6 — Atomic Rule Updates with `nft -f`](#126-atomic-rule-updates-with-nft-f)
+9. [12.7 — Coexistence: firewalld + Custom nftables Tables](#127-coexistence-firewalld-custom-nftables-tables)
+10. [12.8 — Debugging nftables Rules](#128-debugging-nftables-rules)
+11. [Lab 12 — Direct Rules and Advanced nftables](#lab-12-direct-rules-and-advanced-nftables)
+12. [Key Takeaways](#key-takeaways)
+
+---
+
+↑ [Back to TOC](#table-of-contents)
+
 ## Prerequisites
 - Modules 01–11 completed, especially Module 02 (nftables fundamentals)
 - Comfort with the nft command-line tool
 - Lab environment running (`~/firewalld-lab/start-lab.sh`)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Learning Objectives
 By the end of this module you will be able to:
@@ -19,6 +40,8 @@ By the end of this module you will be able to:
 8. Manage nftables rules atomically with `nft -f`
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 12.1 — When to Go Below firewalld
 
@@ -34,6 +57,8 @@ firewalld covers the vast majority of real-world use cases. You should reach for
 | nftables sets with intervals | firewalld ipsets are limited to hash types |
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 12.2 — firewalld Direct Interface (Legacy)
 
@@ -98,6 +123,8 @@ cat /etc/firewalld/direct.xml
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 12.3 — Standalone nftables Tables
 
@@ -206,6 +233,8 @@ systemctl enable --now custom-nft-rules
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 12.4 — Advanced nftables Expressions
 
 ### 12.4.1 Sets and named sets
@@ -296,6 +325,8 @@ ip route add default via 172.20.1.254 table 200
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 12.5 — nftables Flowtables (Fastpath Forwarding)
 
 Flowtables offload established connection forwarding to the kernel's software fastpath (or hardware NIC), bypassing the full nftables ruleset for matched flows.
@@ -348,6 +379,8 @@ nft list flowtable inet fastpath ft
 > **Note**: Flowtable offload bypasses connection tracking for offloaded packets, which means firewalld's state-based rules won't apply to subsequent packets in an offloaded flow. Use flowtables only after the firewall has accepted a connection.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 12.6 — Atomic Rule Updates with `nft -f`
 
@@ -408,6 +441,8 @@ nft -f /tmp/ruleset-backup.nft
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 12.7 — Coexistence: firewalld + Custom nftables Tables
 
 Key rules for safe coexistence:
@@ -432,6 +467,8 @@ nft list table inet custom_filter
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 12.8 — Debugging nftables Rules
 
@@ -468,6 +505,8 @@ nft monitor trace
 | Set not found on reload | Rules fail to apply | Ensure sets are defined before rules that reference them |
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 12 — Direct Rules and Advanced nftables
 
@@ -667,6 +706,8 @@ systemctl daemon-reload
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Key Takeaways
 
 | Topic | Key Point |
@@ -683,3 +724,7 @@ systemctl daemon-reload
 ---
 
 *Next: [Module 13 — Capstone Project](13-capstone-project.md)*
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

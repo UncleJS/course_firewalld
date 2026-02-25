@@ -9,18 +9,20 @@
 
 ## Table of Contents
 
-1. [NAT Fundamentals](#1-nat-fundamentals)
-2. [IP Forwarding — The Kernel Prerequisite](#2-ip-forwarding--the-kernel-prerequisite)
-3. [Masquerading (SNAT)](#3-masquerading-snat)
-4. [Port Forwarding (DNAT)](#4-port-forwarding-dnat)
-5. [StrictForwardPorts](#5-strictforwardports)
-6. [Port Forwarding in Policies vs Zones](#6-port-forwarding-in-policies-vs-zones)
-7. [NAT and IPv6](#7-nat-and-ipv6)
-8. [How NAT Appears in nftables](#8-how-nat-appears-in-nftables)
-9. [Building a Gateway Scenario](#9-building-a-gateway-scenario)
-10. [Lab 7 — Gateway Container with Masquerade](#lab-7--gateway-container-with-masquerade)
+1. [1. NAT Fundamentals](#1-nat-fundamentals)
+2. [2. IP Forwarding — The Kernel Prerequisite](#2-ip-forwarding-the-kernel-prerequisite)
+3. [3. Masquerading (SNAT)](#3-masquerading-snat)
+4. [4. Port Forwarding (DNAT)](#4-port-forwarding-dnat)
+5. [5. StrictForwardPorts](#5-strictforwardports)
+6. [6. Port Forwarding in Policies vs Zones](#6-port-forwarding-in-policies-vs-zones)
+7. [7. NAT and IPv6](#7-nat-and-ipv6)
+8. [8. How NAT Appears in nftables](#8-how-nat-appears-in-nftables)
+9. [9. Building a Gateway Scenario](#9-building-a-gateway-scenario)
+10. [Lab 7 — Gateway Container with Masquerade](#lab-7-gateway-container-with-masquerade)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. NAT Fundamentals
 
@@ -70,6 +72,8 @@ to translate replies back.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 2. IP Forwarding — The Kernel Prerequisite
 
 For a Linux host to act as a router/gateway, the kernel must be configured to
@@ -106,6 +110,8 @@ sysctl --system  # Apply without reboot
 > RHEL 10, always set IP forwarding explicitly.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 3. Masquerading (SNAT)
 
@@ -155,6 +161,8 @@ This entire process is transparent to both the internal host and the external
 server. The conntrack table entry expires after the connection closes.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 4. Port Forwarding (DNAT)
 
@@ -230,6 +238,8 @@ policy.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 5. StrictForwardPorts
 
 `StrictForwardPorts` is a RHEL 10 / firewalld 2.x configuration option in
@@ -292,6 +302,8 @@ strict mode effectively.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 6. Port Forwarding in Policies vs Zones
 
 Port forwarding can be configured in both zones and policies. The choice
@@ -327,6 +339,8 @@ for specific zone-to-zone traffic flows.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 7. NAT and IPv6
 
 Masquerading (SNAT) is fundamentally an IPv4 concept. IPv6 was designed for
@@ -343,6 +357,8 @@ If you need IPv6 NAT (unusual), use a rich rule with a mark and a raw nftables
 postrouting rule (Module 12).
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 8. How NAT Appears in nftables
 
@@ -392,6 +408,8 @@ nft list table ip firewalld | grep -c "dnat\|masquerade"
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 9. Building a Gateway Scenario
 
 A complete gateway configuration:
@@ -428,6 +446,8 @@ firewall-cmd --reload
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 7 — Gateway Container with Masquerade
 
@@ -609,3 +629,7 @@ podman stop node1 node2
 *Module 07 complete.*
 
 **Continue to [Module 08 — Container Integration →](./08-container-integration.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

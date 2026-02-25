@@ -3,6 +3,33 @@
 
 ---
 
+## Table of Contents
+
+1. [Quick Status](#quick-status)
+2. [Zones](#zones)
+3. [Services](#services)
+4. [Ports and Protocols](#ports-and-protocols)
+5. [ICMP](#icmp)
+6. [Rich Rules](#rich-rules)
+7. [NAT — Masquerade and Port Forwarding](#nat-masquerade-and-port-forwarding)
+8. [Policies (Inter-Zone Forwarding)](#policies-inter-zone-forwarding)
+9. [IP Sets](#ip-sets)
+10. [Logging](#logging)
+11. [Runtime vs Permanent](#runtime-vs-permanent)
+12. [Lockdown Mode](#lockdown-mode)
+13. [Panic Mode](#panic-mode)
+14. [nftables Quick Reference](#nftables-quick-reference)
+15. [nftables Chain Hooks (firewalld table)](#nftables-chain-hooks-firewalld-table)
+16. [nftables Priority Reference](#nftables-priority-reference)
+17. [Correlation: firewall-cmd → nftables](#correlation-firewall-cmd-nftables)
+18. [Troubleshooting Quick Checklist](#troubleshooting-quick-checklist)
+19. [File Locations](#file-locations)
+20. [Service Management](#service-management)
+
+---
+
+↑ [Back to TOC](#table-of-contents)
+
 ## Quick Status
 
 ```bash
@@ -16,6 +43,8 @@ systemctl status firewalld              # systemd service status
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Zones
 
@@ -52,6 +81,8 @@ firewall-cmd --zone=external --get-target
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Services
 
 ```bash
@@ -87,6 +118,8 @@ firewall-cmd --zone=public --add-service=myapp --permanent
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Ports and Protocols
 
 ```bash
@@ -104,6 +137,8 @@ firewall-cmd --zone=trusted --remove-protocol=gre --permanent
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## ICMP
 
@@ -123,6 +158,8 @@ firewall-cmd --zone=external --add-icmp-block-inversion --permanent
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Rich Rules
 
@@ -164,6 +201,8 @@ firewall-cmd --zone=public --remove-rich-rule='rule family="ipv4" source address
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## NAT — Masquerade and Port Forwarding
 
 ```bash
@@ -189,6 +228,8 @@ firewall-cmd --zone=external --remove-forward-port=port=443:proto=tcp:toport=844
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Policies (Inter-Zone Forwarding)
 
@@ -221,6 +262,8 @@ firewall-cmd --policy=fw-outbound --add-egress-zone=ANY --permanent
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## IP Sets
 
 ```bash
@@ -252,6 +295,8 @@ firewall-cmd --info-ipset=blocklist
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Logging
 
 ```bash
@@ -271,6 +316,8 @@ journalctl -u firewalld -f
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Runtime vs Permanent
 
@@ -301,6 +348,8 @@ firewall-cmd --check-config
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Lockdown Mode
 
 ```bash
@@ -323,6 +372,8 @@ firewall-cmd --list-lockdown-whitelist-contexts
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Panic Mode
 
 ```bash
@@ -337,6 +388,8 @@ firewall-cmd --query-panic
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## nftables Quick Reference
 
@@ -379,6 +432,8 @@ nft list ruleset > /tmp/backup.nft
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## nftables Chain Hooks (firewalld table)
 
 | Chain | Hook | What it does |
@@ -396,6 +451,8 @@ nft list ruleset > /tmp/backup.nft
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## nftables Priority Reference
 
 | Priority | Constant | Typical use |
@@ -411,6 +468,8 @@ nft list ruleset > /tmp/backup.nft
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Correlation: firewall-cmd → nftables
 
 | firewall-cmd | nftables effect |
@@ -424,6 +483,8 @@ nft list ruleset > /tmp/backup.nft
 | `--new-ipset=X --type=hash:ip` | Creates `set X { type ipv4_addr; }` in nftables |
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Troubleshooting Quick Checklist
 
@@ -447,6 +508,8 @@ echo "=== nft tables ===" && nft list ruleset | grep "^table"
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## File Locations
 
 | Path | Purpose |
@@ -465,6 +528,8 @@ echo "=== nft tables ===" && nft list ruleset | grep "^table"
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Service Management
 
 ```bash
@@ -477,3 +542,7 @@ systemctl reload firewalld            # Reload config (equivalent to --complete-
 ---
 
 *Full course: [README.md](README.md) | FAQ: [faq.md](faq.md)*
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

@@ -1,11 +1,33 @@
 # Module 10 — Logging, Troubleshooting, and Debugging
 
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Learning Objectives](#learning-objectives)
+3. [10.1 — The Logging Stack](#101-the-logging-stack)
+4. [10.2 — firewalld Log Levels](#102-firewalld-log-levels)
+5. [10.3 — nftables Tracing](#103-nftables-tracing)
+6. [10.4 — Systematic Troubleshooting Methodology](#104-systematic-troubleshooting-methodology)
+7. [10.5 — State and Configuration Consistency Checks](#105-state-and-configuration-consistency-checks)
+8. [10.6 — Common Problems and Solutions](#106-common-problems-and-solutions)
+9. [10.7 — Recovering from a Locked-Out State](#107-recovering-from-a-locked-out-state)
+10. [10.8 — Performance Profiling](#108-performance-profiling)
+11. [10.9 — Audit Logging via auditd](#109-audit-logging-via-auditd)
+12. [Lab 10 — Logging and Troubleshooting in Practice](#lab-10-logging-and-troubleshooting-in-practice)
+13. [Key Takeaways](#key-takeaways)
+
+---
+
+↑ [Back to TOC](#table-of-contents)
+
 ## Prerequisites
 - Modules 01–09 completed
 - Lab environment running (`~/firewalld-lab/start-lab.sh`)
 - Familiarity with `journalctl`, `nft`, and firewalld zones
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Learning Objectives
 By the end of this module you will be able to:
@@ -19,6 +41,8 @@ By the end of this module you will be able to:
 8. Reset/recover a misconfigured firewall without losing access
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 10.1 — The Logging Stack
 
@@ -40,6 +64,8 @@ Packet arrives
 Understanding **which layer** generated a message is the first step in any diagnosis.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 10.2 — firewalld Log Levels
 
@@ -119,6 +145,8 @@ journalctl -u firewalld -f
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10.3 — nftables Tracing
 
 nftables has a built-in **trace** mechanism (analogous to `iptables --trace`) that records every rule evaluation for matching packets.
@@ -172,6 +200,8 @@ nft monitor trace | grep -E "verdict (drop|reject)"
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 10.4 — Systematic Troubleshooting Methodology
 
@@ -251,6 +281,8 @@ nft list chain inet firewalld filter_FWD_ZONES
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10.5 — State and Configuration Consistency Checks
 
 ### 10.5.1 Runtime vs permanent divergence
@@ -299,6 +331,8 @@ journalctl -u firewalld --since "$(systemctl show -p ActiveEnterTimestamp firewa
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 10.6 — Common Problems and Solutions
 
@@ -380,6 +414,8 @@ Emergency recovery: console/IPMI access, or a scheduled `firewall-cmd --reload` 
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10.7 — Recovering from a Locked-Out State
 
 If you accidentally block all traffic (including SSH), recovery options in priority order:
@@ -427,6 +463,8 @@ systemctl restart firewalld
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10.8 — Performance Profiling
 
 ### 10.8.1 Measure rule evaluation overhead
@@ -458,6 +496,8 @@ nft list ruleset | grep -A1 "perf-probe"
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10.9 — Audit Logging via auditd
 
 For compliance environments, use the kernel audit subsystem instead of (or in addition to) firewalld's LogDenied.
@@ -475,6 +515,8 @@ ausearch -k firewall-changes --interpret
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 10 — Logging and Troubleshooting in Practice
 
@@ -675,6 +717,8 @@ firewall-cmd --set-log-denied=off
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Key Takeaways
 
 | Topic | Key Point |
@@ -689,3 +733,7 @@ firewall-cmd --set-log-denied=off
 ---
 
 *Next: [Module 11 — Lockdown Mode and Hardening](11-lockdown-mode-and-hardening.md)*
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

@@ -9,18 +9,20 @@
 
 ## Table of Contents
 
-1. [What Is a Firewall and Why Does Linux Need One?](#1-what-is-a-firewall-and-why-does-linux-need-one)
-2. [A Brief History: From ipchains to nftables](#2-a-brief-history-from-ipchains-to-nftables)
-3. [The Linux Packet Filtering Stack](#3-the-linux-packet-filtering-stack)
-4. [Enter firewalld: The Dynamic Firewall Manager](#4-enter-firewalld-the-dynamic-firewall-manager)
-5. [firewalld's Internal Architecture](#5-firewallds-internal-architecture)
-6. [The Two-Layer Model: Runtime vs Permanent](#6-the-two-layer-model-runtime-vs-permanent)
-7. [Configuration Files and Their Locations](#7-configuration-files-and-their-locations)
-8. [The firewall-cmd Tool](#8-the-firewall-cmd-tool)
-9. [firewalld on RHEL 10: What Changed](#9-firewalld-on-rhel-10-what-changed)
-10. [Lab 1 — Explore the Daemon and Two-Layer Model](#lab-1--explore-the-daemon-and-two-layer-model)
+1. [1. What Is a Firewall and Why Does Linux Need One?](#1-what-is-a-firewall-and-why-does-linux-need-one)
+2. [2. A Brief History: From ipchains to nftables](#2-a-brief-history-from-ipchains-to-nftables)
+3. [3. The Linux Packet Filtering Stack](#3-the-linux-packet-filtering-stack)
+4. [4. Enter firewalld: The Dynamic Firewall Manager](#4-enter-firewalld-the-dynamic-firewall-manager)
+5. [5. firewalld's Internal Architecture](#5-firewallds-internal-architecture)
+6. [6. The Two-Layer Model: Runtime vs Permanent](#6-the-two-layer-model-runtime-vs-permanent)
+7. [7. Configuration Files and Their Locations](#7-configuration-files-and-their-locations)
+8. [8. The firewall-cmd Tool](#8-the-firewall-cmd-tool)
+9. [9. firewalld on RHEL 10: What Changed](#9-firewalld-on-rhel-10-what-changed)
+10. [Lab 1 — Explore the Daemon and Two-Layer Model](#lab-1-explore-the-daemon-and-two-layer-model)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. What Is a Firewall and Why Does Linux Need One?
 
@@ -59,6 +61,8 @@ firewall for several reasons:
    which traffic flows between network segments.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 2. A Brief History: From ipchains to nftables
 
@@ -159,6 +163,8 @@ top of `nftables`. You will work primarily with `firewall-cmd`, but understandin
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 3. The Linux Packet Filtering Stack
 
 Before firewalld can make sense, you need to understand where in the kernel
@@ -232,6 +238,8 @@ automatically permitted.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 4. Enter firewalld: The Dynamic Firewall Manager
 
 `firewalld` is a userspace daemon that manages the Linux firewall. It was
@@ -266,6 +274,8 @@ so it's in the public zone with restrictive rules; that interface faces our
 internal LAN, so it's in the internal zone with permissive rules."
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 5. firewalld's Internal Architecture
 
@@ -324,6 +334,8 @@ RHEL 10 this is always the nftables backend. The translator ensures that:
 4. Policy rules appear before or after zone rules as specified
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 6. The Two-Layer Model: Runtime vs Permanent
 
@@ -441,6 +453,8 @@ state — something was added at runtime but not made permanent, or vice versa.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 7. Configuration Files and Their Locations
 
 ### System defaults (read-only)
@@ -499,6 +513,8 @@ DefaultZone=public
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 8. The firewall-cmd Tool
 
@@ -578,6 +594,8 @@ fi
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 9. firewalld on RHEL 10: What Changed
 
 RHEL 10 ships firewalld version 2.x with several important changes:
@@ -629,6 +647,8 @@ The `firewall-config` graphical tool was removed from RHEL 10. All configuration
 is done via `firewall-cmd` or by editing XML files directly.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 1 — Explore the Daemon and Two-Layer Model
 
@@ -848,3 +868,7 @@ rest of this course uses this model.
 *Module 01 complete.*
 
 **Continue to [Module 02 — nftables Fundamentals →](./02-nftables-fundamentals.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

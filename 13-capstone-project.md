@@ -1,5 +1,26 @@
 # Module 13 — Capstone Project: Production Firewall for a Three-Tier Application
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [The Scenario](#the-scenario)
+3. [Part 1 — Design (No Commands Yet)](#part-1-design-no-commands-yet)
+4. [Part 2 — Node 1 (Gateway) Configuration](#part-2-node-1-gateway-configuration)
+5. [Part 3 — Node 2 (Web/App Server) Configuration](#part-3-node-2-webapp-server-configuration)
+6. [Part 4 — Node 3 (Database Server) Configuration](#part-4-node-3-database-server-configuration)
+7. [Part 5 — Auditd Configuration (All Nodes)](#part-5-auditd-configuration-all-nodes)
+8. [Part 6 — Verification Tests](#part-6-verification-tests)
+9. [Part 7 — Hardening Review Checklist](#part-7-hardening-review-checklist)
+10. [Part 8 — nftables Deep-Dive Verification](#part-8-nftables-deep-dive-verification)
+11. [Part 9 — Bonus Challenges](#part-9-bonus-challenges)
+12. [Part 10 — Capstone Teardown](#part-10-capstone-teardown)
+13. [Capstone Completion Criteria](#capstone-completion-criteria)
+14. [Skills Demonstrated](#skills-demonstrated)
+
+---
+
+↑ [Back to TOC](#table-of-contents)
+
 ## Overview
 
 This capstone project integrates everything from the course into a single, end-to-end deployment. You will design, implement, verify, and harden a complete firewall configuration for a three-tier web application using the lab nodes as production-equivalent hosts.
@@ -8,6 +29,8 @@ This capstone project integrates everything from the course into a single, end-t
 **Difficulty**: Expert
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## The Scenario
 
@@ -51,6 +74,8 @@ Internet / External Users
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 1 — Design (No Commands Yet)
 
 Before writing a single `firewall-cmd`, document your design.
@@ -83,6 +108,8 @@ Fill in this table with your planned zone-to-interface mappings:
 | Audit | auditctl on /etc/firewalld | Module 11 |
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 2 — Node 1 (Gateway) Configuration
 
@@ -281,6 +308,8 @@ firewall-cmd --query-lockdown   # → yes
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 3 — Node 2 (Web/App Server) Configuration
 
 ```bash
@@ -351,6 +380,8 @@ firewall-cmd --reload
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 4 — Node 3 (Database Server) Configuration
 
 ```bash
@@ -418,6 +449,8 @@ firewall-cmd --reload
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 5 — Auditd Configuration (All Nodes)
 
 Run these commands on each node:
@@ -438,6 +471,8 @@ EOF
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 6 — Verification Tests
 
@@ -556,6 +591,8 @@ Expected: policies `ext-to-dmz`, `dmz-to-ext`, `int-to-ext`
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 7 — Hardening Review Checklist
 
 Use this checklist as a self-assessment. Every item should be ✅.
@@ -596,6 +633,8 @@ Use this checklist as a self-assessment. Every item should be ✅.
 - [ ] Auditd watching `/etc/firewalld/`
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 8 — nftables Deep-Dive Verification
 
@@ -647,6 +686,8 @@ podman exec node1 bash -c "
 Expected: DNAT rules redirecting 443 and 80 to 172.20.2.20:8080
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 9 — Bonus Challenges
 
@@ -705,6 +746,8 @@ Write a shell script that:
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 10 — Capstone Teardown
 
 ```bash
@@ -721,6 +764,8 @@ done
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Capstone Completion Criteria
 
 You have successfully completed the capstone if:
@@ -732,6 +777,8 @@ You have successfully completed the capstone if:
 5. You can recover any node from a simulated locked-out state using `podman exec`
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Skills Demonstrated
 
@@ -756,3 +803,7 @@ By completing this capstone, you have demonstrated:
 
 *Congratulations on completing the firewalld course!*  
 *See [cheatsheet.md](cheatsheet.md) for a quick-reference summary and [faq.md](faq.md) for answers to common questions.*
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

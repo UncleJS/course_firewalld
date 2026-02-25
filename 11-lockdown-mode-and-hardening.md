@@ -1,11 +1,33 @@
 # Module 11 — Lockdown Mode and Hardening
 
+## Table of Contents
+
+1. [Prerequisites](#prerequisites)
+2. [Learning Objectives](#learning-objectives)
+3. [11.1 — The Threat: Unauthorized Firewall Modification](#111-the-threat-unauthorized-firewall-modification)
+4. [11.2 — How Lockdown Mode Works](#112-how-lockdown-mode-works)
+5. [11.3 — Enabling Lockdown Mode](#113-enabling-lockdown-mode)
+6. [11.4 — The Lockdown Whitelist](#114-the-lockdown-whitelist)
+7. [11.5 — Hardening Zones](#115-hardening-zones)
+8. [11.6 — Detecting Unauthorized Modifications](#116-detecting-unauthorized-modifications)
+9. [11.7 — SELinux Integration](#117-selinux-integration)
+10. [11.8 — CIS and STIG Hardening Recommendations](#118-cis-and-stig-hardening-recommendations)
+11. [11.9 — Hardening firewalld.conf](#119-hardening-firewalldconf)
+12. [Lab 11 — Lockdown Mode and Hardening](#lab-11-lockdown-mode-and-hardening)
+13. [Key Takeaways](#key-takeaways)
+
+---
+
+↑ [Back to TOC](#table-of-contents)
+
 ## Prerequisites
 - Modules 01–10 completed
 - Familiarity with D-Bus, PolicyKit, and systemd services
 - Lab environment running (`~/firewalld-lab/start-lab.sh`)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Learning Objectives
 By the end of this module you will be able to:
@@ -18,6 +40,8 @@ By the end of this module you will be able to:
 7. Integrate firewalld hardening with SELinux and auditd
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 11.1 — The Threat: Unauthorized Firewall Modification
 
@@ -32,6 +56,8 @@ firewall-cmd --zone=public --add-masquerade       # enable traffic pivoting
 firewalld's **lockdown mode** addresses this by requiring applications to be explicitly whitelisted before they can make changes through the D-Bus API.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 11.2 — How Lockdown Mode Works
 
@@ -57,6 +83,8 @@ Direct `nft` commands bypass firewalld entirely and are **not** subject to lockd
 This is why SELinux + auditd are needed as complementary controls.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 11.3 — Enabling Lockdown Mode
 
@@ -85,6 +113,8 @@ Lockdown=yes
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 11.4 — The Lockdown Whitelist
 
@@ -157,6 +187,8 @@ journalctl -u firewalld | grep "ACCESS_DENIED"
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 11.5 — Hardening Zones
 
@@ -254,6 +286,8 @@ Now management traffic from 192.168.100.0/24 gets the `mgmt` zone rules (permiss
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 11.6 — Detecting Unauthorized Modifications
 
 ### 11.6.1 Audit the firewalld config directory
@@ -296,6 +330,8 @@ aide --check
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 11.7 — SELinux Integration
 
@@ -342,6 +378,8 @@ setsebool -P httpd_can_network_connect on
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 11.8 — CIS and STIG Hardening Recommendations
 
 ### Relevant CIS Benchmark items (RHEL 10)
@@ -382,6 +420,8 @@ chown -R root:root /etc/firewalld/
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 11.9 — Hardening firewalld.conf
 
 Key settings in `/etc/firewalld/firewalld.conf`:
@@ -409,6 +449,8 @@ StrictForwardPorts=yes
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 11 — Lockdown Mode and Hardening
 
@@ -579,6 +621,8 @@ firewall-cmd --zone=external --remove-icmp-block=echo-request
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Key Takeaways
 
 | Topic | Key Point |
@@ -593,3 +637,7 @@ firewall-cmd --zone=external --remove-icmp-block=echo-request
 ---
 
 *Next: [Module 12 — Direct Rules and Advanced nftables](12-direct-rules-and-advanced-nftables.md)*
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

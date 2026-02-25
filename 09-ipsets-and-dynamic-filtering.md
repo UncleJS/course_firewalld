@@ -9,22 +9,22 @@
 
 ## Table of Contents
 
-1. [Why IP Sets?](#1-why-ip-sets)
-2. [IP Set Types](#2-ip-set-types)
-3. [Creating and Managing IP Sets](#3-creating-and-managing-ip-sets)
-4. [Adding and Removing Entries](#4-adding-and-removing-entries)
-5. [Timeout-Based Entries (Dynamic Expiry)](#5-timeout-based-entries-dynamic-expiry)
-6. [Using Sets in Rich Rules](#6-using-sets-in-rich-rules)
-7. [Using Sets in Zones](#7-using-sets-in-zones)
-8. [Populating Sets from Files](#8-populating-sets-from-files)
-9. [Geo-blocking with IP Sets](#9-geo-blocking-with-ip-sets)
-   - [Blocking a country](#using-ipdeny-com-cidr-lists-ipdeny-approach)
-   - [Allowing only a specific country](#allowing-only-a-specific-country)
-10. [IP Sets in nftables](#10-ip-sets-in-nftables)
-11. [IP Set XML Format](#11-ip-set-xml-format)
-12. [Lab 9 — Dynamic Block List with Auto-Expiry](#lab-9--dynamic-block-list-with-auto-expiry)
+1. [1. Why IP Sets?](#1-why-ip-sets)
+2. [2. IP Set Types](#2-ip-set-types)
+3. [3. Creating and Managing IP Sets](#3-creating-and-managing-ip-sets)
+4. [4. Adding and Removing Entries](#4-adding-and-removing-entries)
+5. [5. Timeout-Based Entries (Dynamic Expiry)](#5-timeout-based-entries-dynamic-expiry)
+6. [6. Using Sets in Rich Rules](#6-using-sets-in-rich-rules)
+7. [7. Using Sets in Zones](#7-using-sets-in-zones)
+8. [8. Populating Sets from Files](#8-populating-sets-from-files)
+9. [9. Geo-blocking with IP Sets](#9-geo-blocking-with-ip-sets)
+10. [10. IP Sets in nftables](#10-ip-sets-in-nftables)
+11. [11. IP Set XML Format](#11-ip-set-xml-format)
+12. [Lab 9 — Dynamic Block List with Auto-Expiry](#lab-9-dynamic-block-list-with-auto-expiry)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. Why IP Sets?
 
@@ -64,6 +64,8 @@ an entry doesn't require reloading the entire ruleset.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 2. IP Set Types
 
 firewalld supports several IP set types, corresponding to nftables set types:
@@ -79,6 +81,8 @@ firewalld supports several IP set types, corresponding to nftables set types:
 The most commonly used types are `hash:ip` and `hash:net`.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 3. Creating and Managing IP Sets
 
@@ -126,6 +130,8 @@ firewall-cmd --permanent --delete-ipset=blocklist
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 4. Adding and Removing Entries
 
 ### Single entries
@@ -168,6 +174,8 @@ firewall-cmd --ipset=blocklist --get-entries > /tmp/blocklist-entries.txt
 > Exception: entries added with `--timeout` (section 5) are always runtime only.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 5. Timeout-Based Entries (Dynamic Expiry)
 
@@ -235,6 +243,8 @@ actionunban = firewall-cmd --ipset=temp-block --remove-entry=<ip>
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 6. Using Sets in Rich Rules
 
 Rich rules reference sets with `source ipset="setname"`:
@@ -269,6 +279,8 @@ firewall-cmd --permanent --zone=public --add-rich-rule='
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 7. Using Sets in Zones
 
 You can bind an IP set to a zone directly (as a source), so all traffic from
@@ -300,6 +312,8 @@ firewall-cmd --reload
 Note the `ipset:` prefix when using a set as a zone source.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 8. Populating Sets from Files
 
@@ -352,6 +366,8 @@ echo "Loaded $(wc -l < "$IPFILE") entries into ${NAME}"
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 9. Geo-blocking with IP Sets
 
@@ -537,6 +553,8 @@ firewall-cmd --reload
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10. IP Sets in nftables
 
 firewalld's IP sets map directly to nftables named sets. Understanding this
@@ -580,6 +598,8 @@ nft list set inet firewalld blocklist
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 11. IP Set XML Format
 
 Full schema for IP set XML files (`/etc/firewalld/ipsets/`):
@@ -604,6 +624,8 @@ Full schema for IP set XML files (`/etc/firewalld/ipsets/`):
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 9 — Dynamic Block List with Auto-Expiry
 
@@ -837,3 +859,7 @@ firewall-cmd --reload
 *Module 09 complete.*
 
 **Continue to [Module 10 — Logging, Troubleshooting, and Debugging →](./10-logging-troubleshooting-and-debugging.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

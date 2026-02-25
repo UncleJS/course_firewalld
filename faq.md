@@ -4,6 +4,25 @@
 
 ---
 
+## Table of Contents
+
+1. [Part 1 — Concepts and Architecture](#part-1-concepts-and-architecture)
+2. [Part 2 — Zones and Interfaces](#part-2-zones-and-interfaces)
+3. [Part 3 — Services, Ports, and Protocols](#part-3-services-ports-and-protocols)
+4. [Part 4 — Rich Rules](#part-4-rich-rules)
+5. [Part 5 — NAT, Masquerade, and Port Forwarding](#part-5-nat-masquerade-and-port-forwarding)
+6. [Part 6 — Policies](#part-6-policies)
+7. [Part 7 — IP Sets](#part-7-ip-sets)
+8. [Part 8 — Logging and Troubleshooting](#part-8-logging-and-troubleshooting)
+9. [Part 9 — Lockdown and Hardening](#part-9-lockdown-and-hardening)
+10. [Part 10 — nftables Deep Dive](#part-10-nftables-deep-dive)
+11. [Part 11 — Container and Lab Environment](#part-11-container-and-lab-environment)
+12. [Part 12 — Advanced and Operational](#part-12-advanced-and-operational)
+
+---
+
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 1 — Concepts and Architecture
 
 **Q1. What is firewalld and how does it relate to nftables?**
@@ -78,6 +97,8 @@ Zone targets define what happens to packets that don't match any specific rule i
 `firewall-cmd --panic-on` blocks ALL network traffic immediately — inbound and outbound. It is a last resort for security incidents. It will disconnect SSH sessions. Use `podman exec` or console access to recover with `firewall-cmd --panic-off`.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 2 — Zones and Interfaces
 
@@ -154,6 +175,8 @@ Only zones with at least one active interface or source assignment are "active."
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 3 — Services, Ports, and Protocols
 
 **Q19. What is a service in firewalld?**
@@ -209,6 +232,8 @@ firewall-cmd --zone=trusted --add-protocol=ospf --permanent
 Protocol names are from `/etc/protocols`.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 4 — Rich Rules
 
@@ -315,6 +340,8 @@ Alternatively, list rules with `--list-rich-rules`, copy the exact string, and u
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 5 — NAT, Masquerade, and Port Forwarding
 
 **Q33. What is masquerade and when do I need it?**
@@ -367,6 +394,8 @@ firewall-cmd --zone=external --add-forward-port=port=8080:proto=tcp:toport=80 --
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 6 — Policies
 
 **Q39. What is a firewalld policy (introduced in firewalld 0.9)?**
@@ -405,6 +434,8 @@ firewall-cmd --policy=host-out --add-egress-zone=ANY --permanent
 You can add services, ports, rich rules, and more to a policy — just like zones. If you set `--set-target=CONTINUE` the policy can add specific allows while falling through to the next policy.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 7 — IP Sets
 
@@ -488,6 +519,8 @@ nft add set inet custom_filter temp_block \
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 8 — Logging and Troubleshooting
 
@@ -603,6 +636,8 @@ Returns `success` or a list of errors.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 9 — Lockdown and Hardening
 
 **Q58. What does lockdown mode actually protect against?**
@@ -671,6 +706,8 @@ Key STIG requirements:
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 10 — nftables Deep Dive
 
 **Q64. What is the `inet` address family in nftables?**
@@ -738,6 +775,8 @@ Use `nft -f <file>` for atomic application. The entire file is validated and app
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Part 11 — Container and Lab Environment
 
 **Q72. Why use rootless Podman containers as lab nodes instead of VMs?**
@@ -768,6 +807,8 @@ Not with rootless Podman. Rootless containers run in their own network namespace
 RHEL 10 uses **Podman 5.x with Netavark** as the network stack. For rootless containers, Podman uses **pasta** (not slirp4netns) for network connectivity. Pasta provides better performance and supports more network features. Custom lab networks created with `podman network create` use Netavark with user-mode routing between containers.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Part 12 — Advanced and Operational
 
@@ -801,3 +842,7 @@ Most RHEL 9 configurations are compatible with RHEL 10 — the main change is th
 ---
 
 *Quick Reference: [cheatsheet.md](cheatsheet.md) | Full Course: [README.md](README.md)*
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

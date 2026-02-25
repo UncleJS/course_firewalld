@@ -10,20 +10,22 @@
 
 ## Table of Contents
 
-1. [The Zone Mental Model](#1-the-zone-mental-model)
-2. [How Traffic Is Assigned to a Zone](#2-how-traffic-is-assigned-to-a-zone)
-3. [Interface Binding vs Source Binding](#3-interface-binding-vs-source-binding)
-4. [Binding Precedence](#4-binding-precedence)
-5. [The Nine Predefined Zones](#5-the-nine-predefined-zones)
-6. [Zone Targets](#6-zone-targets)
-7. [The Default Zone](#7-the-default-zone)
-8. [Creating and Managing Custom Zones](#8-creating-and-managing-custom-zones)
-9. [Zone XML Format](#9-zone-xml-format)
-10. [Intra-zone Forwarding](#10-intra-zone-forwarding)
-11. [Zone Inspection Commands](#11-zone-inspection-commands)
-12. [Lab 3 — Custom Zones and Interface Binding](#lab-3--custom-zones-and-interface-binding)
+1. [1. The Zone Mental Model](#1-the-zone-mental-model)
+2. [2. How Traffic Is Assigned to a Zone](#2-how-traffic-is-assigned-to-a-zone)
+3. [3. Interface Binding vs Source Binding](#3-interface-binding-vs-source-binding)
+4. [4. Binding Precedence](#4-binding-precedence)
+5. [5. The Nine Predefined Zones](#5-the-nine-predefined-zones)
+6. [6. Zone Targets](#6-zone-targets)
+7. [7. The Default Zone](#7-the-default-zone)
+8. [8. Creating and Managing Custom Zones](#8-creating-and-managing-custom-zones)
+9. [9. Zone XML Format](#9-zone-xml-format)
+10. [10. Intra-zone Forwarding](#10-intra-zone-forwarding)
+11. [11. Zone Inspection Commands](#11-zone-inspection-commands)
+12. [Lab 3 — Custom Zones and Interface Binding](#lab-3-custom-zones-and-interface-binding)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. The Zone Mental Model
 
@@ -62,6 +64,8 @@ ingress based on the packet's source interface or source IP address.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 2. How Traffic Is Assigned to a Zone
 
 Every packet processed by firewalld is assigned to exactly one zone. The
@@ -92,6 +96,8 @@ Incoming packet
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 3. Interface Binding vs Source Binding
 
@@ -146,6 +152,8 @@ Source bindings are powerful for:
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 4. Binding Precedence
 
 When a packet could match multiple zones (an interface binding AND a source
@@ -173,6 +181,8 @@ range has a source binding to `internal`, so VPN clients get appropriate access.
 > 10.10.5.1 uses zone B, not zone A.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 5. The Nine Predefined Zones
 
@@ -345,6 +355,8 @@ dedicated backup interfaces, or specific high-trust management networks.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 6. Zone Targets
 
 The **target** of a zone defines what happens to packets that do NOT match any
@@ -375,6 +387,8 @@ firewall-cmd --permanent --zone=myzone --set-target=DROP
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 7. The Default Zone
 
 The **default zone** is the zone assigned to interfaces that have no explicit
@@ -399,6 +413,8 @@ The default zone matters most when:
 - Container network interfaces are created dynamically
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 8. Creating and Managing Custom Zones
 
@@ -461,6 +477,8 @@ firewall-cmd --info-zone=internal
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 9. Zone XML Format
 
@@ -550,6 +568,8 @@ firewall-cmd --reload
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10. Intra-zone Forwarding
 
 **Intra-zone forwarding** controls whether traffic between two sources/interfaces
@@ -582,6 +602,8 @@ firewall-cmd --reload
 > preserved.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 11. Zone Inspection Commands
 
@@ -616,6 +638,8 @@ firewall-cmd --permanent --delete-zone=myzone
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 3 — Custom Zones and Interface Binding
 
@@ -819,3 +843,7 @@ You learned:
 *Module 03 complete.*
 
 **Continue to [Module 04 — Services, Ports, and Protocols →](./04-services-ports-and-protocols.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

@@ -10,19 +10,21 @@
 
 ## Table of Contents
 
-1. [The Container-Firewall Problem](#1-the-container-firewall-problem)
-2. [How Podman Networking Works on RHEL 10](#2-how-podman-networking-works-on-rhel-10)
-3. [Rootless vs Rootful Podman and Firewalld](#3-rootless-vs-rootful-podman-and-firewalld)
-4. [Seamless Mode (Default): StrictForwardPorts=no](#4-seamless-mode-default-strictforwardportsno)
-5. [Strict Mode: StrictForwardPorts=yes](#5-strict-mode-strictforwardportsyes)
-6. [Binding Container Networks to Zones](#6-binding-container-networks-to-zones)
-7. [Container-to-Host Traffic Policies](#7-container-to-host-traffic-policies)
-8. [Container-to-Container Cross-Network Policies](#8-container-to-container-cross-network-policies)
-9. [Disabling Container Runtime Firewall Management](#9-disabling-container-runtime-firewall-management)
-10. [Practical Container Zone Architecture](#10-practical-container-zone-architecture)
-11. [Lab 8 — Seamless vs Strict Mode Comparison](#lab-8--seamless-vs-strict-mode-comparison)
+1. [1. The Container-Firewall Problem](#1-the-container-firewall-problem)
+2. [2. How Podman Networking Works on RHEL 10](#2-how-podman-networking-works-on-rhel-10)
+3. [3. Rootless vs Rootful Podman and Firewalld](#3-rootless-vs-rootful-podman-and-firewalld)
+4. [4. Seamless Mode (Default): StrictForwardPorts=no](#4-seamless-mode-default-strictforwardportsno)
+5. [5. Strict Mode: StrictForwardPorts=yes](#5-strict-mode-strictforwardportsyes)
+6. [6. Binding Container Networks to Zones](#6-binding-container-networks-to-zones)
+7. [7. Container-to-Host Traffic Policies](#7-container-to-host-traffic-policies)
+8. [8. Container-to-Container Cross-Network Policies](#8-container-to-container-cross-network-policies)
+9. [9. Disabling Container Runtime Firewall Management](#9-disabling-container-runtime-firewall-management)
+10. [10. Practical Container Zone Architecture](#10-practical-container-zone-architecture)
+11. [Lab 8 — Seamless vs Strict Mode Comparison](#lab-8-seamless-vs-strict-mode-comparison)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. The Container-Firewall Problem
 
@@ -46,6 +48,8 @@ Both perspectives are valid. firewalld 2.x on RHEL 10 gives you control over
 which perspective wins, via `StrictForwardPorts`.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 2. How Podman Networking Works on RHEL 10
 
@@ -100,6 +104,8 @@ better, but still operates without kernel privileges for the most part.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 3. Rootless vs Rootful Podman and Firewalld
 
 This is one of the most important distinctions in RHEL 10 container networking:
@@ -145,6 +151,8 @@ to nftables rules. On RHEL 10, this is less common but still possible.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 4. Seamless Mode (Default): StrictForwardPorts=no
 
 In seamless mode, container runtimes manage their own firewall rules and they
@@ -181,6 +189,8 @@ nft list table ip nat      # for DNAT rules
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 5. Strict Mode: StrictForwardPorts=yes
 
@@ -229,6 +239,8 @@ firewall-cmd --reload
    all open ports
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 6. Binding Container Networks to Zones
 
@@ -287,6 +299,8 @@ firewall-cmd --reload
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 7. Container-to-Host Traffic Policies
 
 Containers often need to reach services on the host (database, message queue,
@@ -320,6 +334,8 @@ firewall-cmd --reload
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 8. Container-to-Container Cross-Network Policies
 
 By default, containers on different Podman networks cannot communicate with each
@@ -349,6 +365,8 @@ firewall-cmd --reload
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 9. Disabling Container Runtime Firewall Management
 
@@ -402,6 +420,8 @@ podman network create \
 > configure everything explicitly.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 10. Practical Container Zone Architecture
 
@@ -472,6 +492,8 @@ firewall-cmd --reload
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 8 — Seamless vs Strict Mode Comparison
 
@@ -653,3 +675,7 @@ networking. Only rootful containers interact with the host nftables rules.
 *Module 08 complete.*
 
 **Continue to [Module 09 — IP Sets and Dynamic Filtering →](./09-ipsets-and-dynamic-filtering.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

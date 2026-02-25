@@ -10,20 +10,22 @@
 
 ## Table of Contents
 
-1. [Why You Need to Understand nftables](#1-why-you-need-to-understand-nftables)
-2. [nftables Core Concepts](#2-nftables-core-concepts)
-3. [Tables](#3-tables)
-4. [Chains and Hooks](#4-chains-and-hooks)
-5. [Rules and Expressions](#5-rules-and-expressions)
-6. [Sets and Maps](#6-sets-and-maps)
-7. [The nft CLI](#7-the-nft-cli)
-8. [Connection Tracking in nftables](#8-connection-tracking-in-nftables)
-9. [How firewalld Uses nftables](#9-how-firewalld-uses-nftables)
-10. [Flowtables — Software Fastpath](#10-flowtables--software-fastpath)
-11. [Atomic Rule Updates](#11-atomic-rule-updates)
-12. [Lab 2 — Write Rules Then Compare with firewalld](#lab-2--write-rules-then-compare-with-firewalld)
+1. [1. Why You Need to Understand nftables](#1-why-you-need-to-understand-nftables)
+2. [2. nftables Core Concepts](#2-nftables-core-concepts)
+3. [3. Tables](#3-tables)
+4. [4. Chains and Hooks](#4-chains-and-hooks)
+5. [5. Rules and Expressions](#5-rules-and-expressions)
+6. [6. Sets and Maps](#6-sets-and-maps)
+7. [7. The nft CLI](#7-the-nft-cli)
+8. [8. Connection Tracking in nftables](#8-connection-tracking-in-nftables)
+9. [9. How firewalld Uses nftables](#9-how-firewalld-uses-nftables)
+10. [10. Flowtables — Software Fastpath](#10-flowtables-software-fastpath)
+11. [11. Atomic Rule Updates](#11-atomic-rule-updates)
+12. [Lab 2 — Write Rules Then Compare with firewalld](#lab-2-write-rules-then-compare-with-firewalld)
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 1. Why You Need to Understand nftables
 
@@ -53,6 +55,8 @@ This module is the prerequisite.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 2. nftables Core Concepts
 
 nftables is built on four core abstractions:
@@ -73,6 +77,8 @@ These are defined in a **ruleset** — the complete set of all tables, chains,
 rules, sets, and maps currently loaded in the kernel.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 3. Tables
 
@@ -110,6 +116,8 @@ nft delete table inet my_table
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 4. Chains and Hooks
 
@@ -171,6 +179,8 @@ The `policy` on a base chain (`accept` or `drop`) is the **default verdict**
 for packets that reach the end of the chain without matching any rule.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 5. Rules and Expressions
 
@@ -288,6 +298,8 @@ nft insert rule inet my_table my_input_chain handle 6 \
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 6. Sets and Maps
 
 ### Sets
@@ -351,6 +363,8 @@ nft add rule inet my_table prerouting \
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 7. The nft CLI
 
@@ -444,6 +458,8 @@ nft -f /tmp/ruleset-backup.nft
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 8. Connection Tracking in nftables
 
 nftables integrates with the kernel's `conntrack` module for stateful inspection.
@@ -480,6 +496,8 @@ nft add rule inet my_table prerouting \
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## 9. How firewalld Uses nftables
 
@@ -602,6 +620,8 @@ rules — so firewalld's policy is applied first.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 10. Flowtables — Software Fastpath
 
 A **flowtable** is an nftables feature that moves packet forwarding decisions
@@ -636,6 +656,8 @@ firewalld.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## 11. Atomic Rule Updates
 
 One of nftables' most important advantages over iptables is **atomic ruleset
@@ -666,6 +688,8 @@ This is why `firewall-cmd --reload` is safe to use on production systems even
 while connections are active — the ruleset swap is atomic.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Lab 2 — Write Rules Then Compare with firewalld
 
@@ -923,3 +947,7 @@ nft -a list chain inet firewalld filter_IN_public   # With handles
 *Module 02 complete.*
 
 **Continue to [Module 03 — Zones and the Trust Model →](./03-zones-and-trust-model.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0

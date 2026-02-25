@@ -6,6 +6,23 @@ container labs throughout.
 
 ---
 
+## Table of Contents
+
+1. [Who This Course Is For](#who-this-course-is-for)
+2. [What You Will Learn](#what-you-will-learn)
+3. [Course Structure](#course-structure)
+4. [Module Overview](#module-overview)
+5. [Quick Reference Files](#quick-reference-files)
+6. [Prerequisites](#prerequisites)
+7. [How to Use This Course](#how-to-use-this-course)
+8. [A Note on RHEL 10 Specifics](#a-note-on-rhel-10-specifics)
+9. [Conventions Used in This Course](#conventions-used-in-this-course)
+10. [Feedback and Errata](#feedback-and-errata)
+
+---
+
+↑ [Back to TOC](#table-of-contents)
+
 ## Who This Course Is For
 
 | Level | You are ready if… |
@@ -19,6 +36,8 @@ command-line basics (files, processes, systemd) and basic networking concepts
 (IP addresses, ports, TCP/UDP) is expected.
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## What You Will Learn
 
@@ -37,6 +56,8 @@ By the end of this course you will be able to:
 - Diagnose and resolve real-world firewall problems systematically
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Course Structure
 
@@ -62,6 +83,8 @@ course_firewalld/
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Module Overview
 
@@ -140,6 +163,8 @@ implementation with full explanation of every decision.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Quick Reference Files
 
 - **[cheatsheet.md](./cheatsheet.md)** — Every common `firewall-cmd` invocation
@@ -148,6 +173,8 @@ implementation with full explanation of every decision.
   "why does my container lose internet after a firewall reload?"
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## Prerequisites
 
@@ -181,6 +208,8 @@ sudo dnf install -y nmap-ncat iputils bind-utils
 ```
 
 ---
+
+↑ [Back to TOC](#table-of-contents)
 
 ## How to Use This Course
 
@@ -218,6 +247,8 @@ Context, background, or a cross-reference to another module.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## A Note on RHEL 10 Specifics
 
 This course targets **RHEL 10** specifically. Key differences from RHEL 9 that
@@ -239,6 +270,8 @@ explicitly with a `> RHEL 10` callout.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Conventions Used in This Course
 
 - Shell commands are shown with a `$` prefix for regular user and `#` for root:
@@ -256,6 +289,8 @@ explicitly with a `> RHEL 10` callout.
 
 ---
 
+↑ [Back to TOC](#table-of-contents)
+
 ## Feedback and Errata
 
 This course targets the RHEL 10 GA release. As firewalld evolves, some commands
@@ -271,3 +306,7 @@ or behaviours may change. Always cross-reference against:
 *Let's build a thorough understanding — concept by concept, command by command.*
 
 **Start with [Module 00 — Lab Environment Setup →](./00-setup-lab-environment.md)**
+
+---
+
+© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0
