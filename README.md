@@ -18,6 +18,7 @@ container labs throughout.
 8. [A Note on RHEL 10 Specifics](#a-note-on-rhel-10-specifics)
 9. [Conventions Used in This Course](#conventions-used-in-this-course)
 10. [Feedback and Errata](#feedback-and-errata)
+11. [License](#license)
 
 ---
 
@@ -306,6 +307,17 @@ or behaviours may change. Always cross-reference against:
 *Let's build a thorough understanding — concept by concept, command by command.*
 
 **Start with [Module 00 — Lab Environment Setup →](./00-setup-lab-environment.md)**
+
+---
+
+↑ [Back to TOC](#table-of-contents)
+
+## License
+
+This project is licensed under the
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+
+https://creativecommons.org/licenses/by-sa/4.0/
 
 ---
 
