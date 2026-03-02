@@ -35,7 +35,7 @@ MD_FILES = [
     "faq.md",
 ]
 
-COPYRIGHT_LINE = "© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0"
+COPYRIGHT_LINE = "© 2026 UncleJS — Licensed under CC BY-NC-SA 4.0"
 BACK_TO_TOC = "\n\n---\n\n↑ [Back to TOC](#table-of-contents)"
 
 

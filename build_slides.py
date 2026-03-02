@@ -814,7 +814,7 @@ def add_copyright_footer(slide, st: Styles):
     """
     footer_paras = [
         text_para(st.ts_small, st.ps_small,
-                  "© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0")
+                  "© 2026 UncleJS — Licensed under CC BY-NC-SA 4.0")
     ]
     add_text_box(slide, st.gs_frame,
                  "1cm", "18.35cm", "31.87cm", "0.6cm", footer_paras)

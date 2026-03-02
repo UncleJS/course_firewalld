@@ -4,6 +4,10 @@ A comprehensive, hands-on course covering firewalld from first principles to
 expert-level mastery — on Red Hat Enterprise Linux 10, with rootless Podman
 container labs throughout.
 
+[![CC BY-NC-SA 4.0](https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey)](LICENSE.md)
+[![RHEL 10](https://img.shields.io/badge/platform-RHEL%2010-red)](https://access.redhat.com/products/red-hat-enterprise-linux)
+[![firewalld](https://img.shields.io/badge/firewalld-RHEL%2010-orange)](https://access.redhat.com/products/red-hat-enterprise-linux)
+
 ---
 
 ## Table of Contents
@@ -315,10 +319,10 @@ or behaviours may change. Always cross-reference against:
 ## License
 
 This project is licensed under the
-Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0).
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0).
 
-https://creativecommons.org/licenses/by-sa/4.0/
+https://creativecommons.org/licenses/by-nc-sa/4.0/
 
 ---
 
-© 2026 Jaco Steyn — Licensed under CC BY-SA 4.0
+© 2026 UncleJS — Licensed under CC BY-NC-SA 4.0
