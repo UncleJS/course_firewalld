@@ -1,0 +1,38 @@
+# Python cache and local tooling artifacts
+__pycache__/
+*.py[cod]
+
+# Local environment files
+.env
+.env.*
+.env.example
+
+# Secrets and credentials
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.csr
+*.ovpn
+*.kubeconfig
+*.creds
+*.credentials
+credentials.*
+secrets.*
+secret.*
+
+# Secret-bearing config variants
+config.local.*
+config.private.*
+config.secret.*
+settings.local.*
+settings.private.*
+
+# Editor and OS noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
